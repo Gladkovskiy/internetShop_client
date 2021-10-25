@@ -1,18 +1,42 @@
 import {observer} from 'mobx-react-lite'
 import React from 'react'
-import {Container, Navbar, Nav} from 'react-bootstrap'
+import {Container, Navbar, Nav, Button} from 'react-bootstrap'
+import {NavLink} from 'react-router-dom'
+
+import {SHOP_ROUTE} from '../utils/consts'
 import user from '../store/UserStore'
 
 const NavBar = observer(() => {
   return (
-    <Navbar bg="light" variant="light">
+    <Navbar bg="dark" variant="dark">
       <Container>
-        <Navbar.Brand href="#home">Navbar</Navbar.Brand>
-        <Nav className="me-auto">
-          <Nav.Link href="#home">Home</Nav.Link>
-          <Nav.Link href="#features">Features</Nav.Link>
-          <Nav.Link href="#pricing">Pricing</Nav.Link>
-        </Nav>
+        <NavLink
+          style={{color: 'white', textDecoration: 'none'}}
+          to={SHOP_ROUTE}
+        >
+          Internet Shop
+        </NavLink>
+        {user.isAuth ? (
+          <Nav className="ms-auto" style={{color: 'white'}}>
+            <Button variant={'outline-light'}>Админ панель</Button>
+            <Button
+              className="ms-2"
+              variant={'outline-light'}
+              onClick={() => user.setIsAuth(false)}
+            >
+              Выйти
+            </Button>
+          </Nav>
+        ) : (
+          <Nav className="ms-auto" style={{color: 'white'}}>
+            <Button
+              variant={'outline-light'}
+              onClick={() => user.setIsAuth(true)}
+            >
+              Авторизация
+            </Button>
+          </Nav>
+        )}
       </Container>
     </Navbar>
   )
