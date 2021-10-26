@@ -5,10 +5,14 @@ class DeviceStore {
   type = [
     {id: 1, name: 'Холодильник'},
     {id: 2, name: 'Смартфоны'},
+    {id: 3, name: 'Ноутбуки'},
+    {id: 4, name: 'Телевизоры'},
   ]
   brand = [
     {id: 1, name: 'Samsung'},
     {id: 2, name: 'Apple'},
+    {id: 3, name: 'Saturn'},
+    {id: 4, name: 'Panasonic'},
   ]
   devices = [
     {
@@ -39,7 +43,24 @@ class DeviceStore {
       rating: 5,
       img: 'https://content1.rozetka.com.ua/goods/images/big/30873055.jpg',
     },
+    {
+      id: 5,
+      name: 'Iphone 12 pro',
+      price: 10000,
+      rating: 5,
+      img: 'https://content1.rozetka.com.ua/goods/images/big/30873055.jpg',
+    },
+    {
+      id: 6,
+      name: 'Iphone 12 pro',
+      price: 10000,
+      rating: 5,
+      img: 'https://content1.rozetka.com.ua/goods/images/big/30873055.jpg',
+    },
   ]
+
+  selectedType = {}
+  selectedBrand = {}
 
   constructor() {
     makeAutoObservable(this)
@@ -55,6 +76,14 @@ class DeviceStore {
 
   setDevices(devices) {
     this.isUser = devices
+  }
+
+  setSelectedType(type) {
+    this.selectedType = type
+  }
+
+  setSelectedBrand(brand) {
+    this.selectedBrand = brand
   }
 }
 

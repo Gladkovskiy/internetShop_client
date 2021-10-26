@@ -33,6 +33,7 @@ const NavBar = observer(() => {
               variant={'outline-light'}
               onClick={() => user.setIsAuth(true)}
             >
+              {' '}
               Авторизация
             </Button>
           </Nav>
