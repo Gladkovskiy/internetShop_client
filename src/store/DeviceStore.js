@@ -1,4 +1,4 @@
-const {makeAutoObservable} = require('mobx')
+import {makeAutoObservable} from 'mobx'
 
 class DeviceStore {
   //пока нет базы используем просто массивы с данными

@@ -1,12 +1,14 @@
 import {observer} from 'mobx-react-lite'
 import React from 'react'
 import {Container, Navbar, Nav, Button} from 'react-bootstrap'
-import {NavLink} from 'react-router-dom'
+import {NavLink, useHistory} from 'react-router-dom'
 
-import {SHOP_ROUTE} from '../utils/consts'
+import {SHOP_ROUTE, LOGIN_ROUTE, ADMIN_ROUTE} from '../utils/consts'
 import user from '../store/UserStore'
 
 const NavBar = observer(() => {
+  const history = useHistory()
+
   return (
     <Navbar bg="dark" variant="dark">
       <Container>
@@ -18,11 +20,16 @@ const NavBar = observer(() => {
         </NavLink>
         {user.isAuth ? (
           <Nav className="ms-auto" style={{color: 'white'}}>
-            <Button variant={'outline-light'}>Админ панель</Button>
+            <Button
+              variant={'outline-light'}
+              onClick={() => history.push(ADMIN_ROUTE)}
+            >
+              Админ панель
+            </Button>
             <Button
               className="ms-2"
               variant={'outline-light'}
-              onClick={() => user.setIsAuth(false)}
+              onClick={() => history.push(LOGIN_ROUTE)}
             >
               Выйти
             </Button>
@@ -31,7 +38,7 @@ const NavBar = observer(() => {
           <Nav className="ms-auto" style={{color: 'white'}}>
             <Button
               variant={'outline-light'}
-              onClick={() => user.setIsAuth(true)}
+              onClick={() => history.push(LOGIN_ROUTE)}
             >
               {' '}
               Авторизация

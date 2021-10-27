@@ -1,7 +1,7 @@
-const {makeAutoObservable} = require('mobx')
+import {makeAutoObservable} from 'mobx'
 
 class UserStore {
-  isAuth = false
+  isAuth = true
   user = {}
 
   constructor() {

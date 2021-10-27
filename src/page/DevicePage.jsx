@@ -53,15 +53,23 @@ const DevicePage = () => {
         </Col>
       </Row>
       <Row className="mt-4">
-        <h2>ХАРАКТЕРИСТИКИ</h2>
+        <h3>ХАРАКТЕРИСТИКИ</h3>
         {description.map((desc, index) => (
-          <Row
-            className="p-3"
-            key={desc.id}
-            style={{background: index % 2 === 0 ? 'grey' : 'transparent'}}
-          >
-            <Col md={2}>{desc.title + ':'}</Col>
-            <Col md={1}>{desc.description}</Col>
+          <Row key={desc.id}>
+            <Col
+              className="p-2"
+              md={2}
+              style={{background: index % 2 === 0 ? 'grey' : 'transparent'}}
+            >
+              {desc.title + ':'}
+            </Col>
+            <Col
+              className="p-2"
+              md={1}
+              style={{background: index % 2 === 0 ? 'grey' : 'transparent'}}
+            >
+              {desc.description}
+            </Col>
           </Row>
         ))}
       </Row>
