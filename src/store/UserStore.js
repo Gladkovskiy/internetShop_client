@@ -1,7 +1,7 @@
 import {makeAutoObservable} from 'mobx'
 
 class UserStore {
-  isAuth = true
+  isAuth = false
   user = {}
 
   constructor() {
@@ -13,7 +13,7 @@ class UserStore {
   }
 
   setUser(user) {
-    this.isUser = user
+    this.user = user
   }
 }
 

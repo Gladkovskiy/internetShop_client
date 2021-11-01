@@ -9,6 +9,13 @@ import user from '../store/UserStore'
 const NavBar = observer(() => {
   const history = useHistory()
 
+  const logOut = () => {
+    user.setUser('')
+    user.setIsAuth(false)
+    localStorage.removeItem('token')
+    history.push(SHOP_ROUTE)
+  }
+
   return (
     <Navbar bg="dark" variant="dark">
       <Container>
@@ -20,17 +27,16 @@ const NavBar = observer(() => {
         </NavLink>
         {user.isAuth ? (
           <Nav className="ms-auto" style={{color: 'white'}}>
+            <Button variant={'outline-light'} disabled className="me-2">
+              {user.user.email}
+            </Button>
             <Button
               variant={'outline-light'}
               onClick={() => history.push(ADMIN_ROUTE)}
             >
               Админ панель
             </Button>
-            <Button
-              className="ms-2"
-              variant={'outline-light'}
-              onClick={() => history.push(LOGIN_ROUTE)}
-            >
+            <Button className="ms-2" variant={'outline-light'} onClick={logOut}>
               Выйти
             </Button>
           </Nav>

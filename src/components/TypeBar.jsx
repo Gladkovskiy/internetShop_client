@@ -1,9 +1,10 @@
 import {observer} from 'mobx-react-lite'
 import React from 'react'
 import {ListGroup} from 'react-bootstrap'
+
 import device from '../store/DeviceStore'
 
-const TypeBar = observer(() => {
+const TypeBar = () => {
   return (
     <ListGroup className="mt-3">
       {device.type.map(type => (
@@ -18,6 +19,6 @@ const TypeBar = observer(() => {
       ))}
     </ListGroup>
   )
-})
+}
 
-export default TypeBar
+export default observer(TypeBar)

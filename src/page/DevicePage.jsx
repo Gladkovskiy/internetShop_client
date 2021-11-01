@@ -1,9 +1,14 @@
-import React from 'react'
+/* eslint-disable react-hooks/exhaustive-deps */
+import React, {useEffect, useState} from 'react'
 import {Button, Col, Container, Image, Row} from 'react-bootstrap'
+import {useParams} from 'react-router-dom'
+import {Spinner} from 'react-bootstrap'
+
 import bigStar from '../assets/bigStar.png'
+import {getOneDevice} from '../http/deviceAPI'
 
 const DevicePage = () => {
-  const device = {
+  /*  const device = {
     id: 1,
     name: 'Iphone 12 pro',
     price: 10000,
@@ -17,13 +22,40 @@ const DevicePage = () => {
     {id: 3, title: 'Процессор', description: 'Snedgragon'},
     {id: 4, title: 'Количество ядер', description: '12'},
     {id: 5, title: 'Аккумулятор', description: '5000 mAh'},
-  ]
+  ] */
+
+  const [device, setDevice] = useState({info: []})
+  const {id} = useParams()
+  const [loading, setLoading] = useState(true)
+
+  useEffect(() => {
+    const getOneDeviceAsync = async () => {
+      const device = await getOneDevice(id)
+      setDevice(device)
+      setLoading(false)
+    }
+    getOneDeviceAsync()
+  }, [])
+
+  if (loading)
+    return (
+      <Spinner
+        animation="border"
+        role="status"
+        style={{position: 'absolute', left: '50%', top: '50%'}}
+      >
+        <span className="visually-hidden">Loading...</span>
+      </Spinner>
+    )
 
   return (
     <Container>
       <Row className="mt-3 align-content-center">
         <Col md={4}>
-          <Image src={device.img} width={300} />
+          <Image
+            src={process.env.REACT_APP_API_URL + '/' + device.img}
+            width={300}
+          />
         </Col>
         <Col md={4}>
           <h2 className="text-center">{device.name}</h2>
@@ -54,7 +86,7 @@ const DevicePage = () => {
       </Row>
       <Row className="mt-4">
         <h3>ХАРАКТЕРИСТИКИ</h3>
-        {description.map((desc, index) => (
+        {device.info.map((desc, index) => (
           <Row key={desc.id}>
             <Col
               className="p-2"
