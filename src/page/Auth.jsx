@@ -1,36 +1,49 @@
 import React, {useState} from 'react'
 import {Button, Card, Container, Form} from 'react-bootstrap'
-import {NavLink, useLocation, useHistory} from 'react-router-dom'
-import {observer} from 'mobx-react-lite'
+import {NavLink, useLocation} from 'react-router-dom'
 
-import {REGISTRATION_ROUTE, LOGIN_ROUTE, SHOP_ROUTE} from '../utils/consts'
-import {registration, login} from '../http/userAPI'
-import user from '../store/UserStore'
+import {REGISTRATION_ROUTE, LOGIN_ROUTE} from '../utils/consts'
+import useLogin from '../http/react-query/useLogin'
+import useRegistration from '../http/react-query/useRegistration'
 
-const Auth = observer(() => {
+const Auth = () => {
   const location = useLocation()
   const isLogin = location.pathname === LOGIN_ROUTE
-  const history = useHistory()
+
+  const mutateLogin = useLogin()
+  const mutateRegistration = useRegistration()
 
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
-  const [checkPassword, setCheckPassword] = useState('')
 
-  const click = async () => {
-    try {
-      let userData
-      if (isLogin) {
-        userData = await login(email, password)
-      } else {
-        userData = await registration(email, password)
-      }
-      setCheckPassword('')
-      user.setUser(userData)
-      user.setIsAuth(true)
-      history.push(SHOP_ROUTE)
-    } catch (e) {
-      setCheckPassword(e.response.data.message)
+  const click = () => {
+    if (isLogin) {
+      mutateLogin.mutate({email, password})
+    } else {
+      mutateRegistration.mutate({email, password})
     }
+  }
+
+  const loading = mutateLogin.isLoading || mutateRegistration.isLoading
+  const error = mutateLogin.isError || mutateRegistration.isError
+
+  const showError = () => {
+    if (error) {
+      if (isLogin) {
+        return (
+          <span style={{color: 'red'}}>
+            {mutateLogin.error.response.data.message}
+          </span>
+        )
+      } else {
+        return (
+          <span style={{color: 'red'}}>
+            {mutateRegistration.error.response.data.message}
+          </span>
+        )
+      }
+    }
+    return null
   }
 
   return (
@@ -54,6 +67,7 @@ const Auth = observer(() => {
             value={password}
             onChange={e => setPassword(e.target.value)}
           />
+
           <div className="d-flex justify-content-between mt-2 flex-row align-items-center">
             {isLogin ? (
               <div>
@@ -70,10 +84,12 @@ const Auth = observer(() => {
                 </NavLink>
               </div>
             )}
-            <span style={{color: 'red'}}>
-              {checkPassword.length !== 0 ? checkPassword : null}
-            </span>
-            <Button variant={'outline-success'} onClick={click}>
+            {showError()}
+            <Button
+              variant={'outline-success'}
+              onClick={click}
+              disabled={loading}
+            >
               {isLogin ? 'Войти' : 'Зарегистрироваться'}
             </Button>
           </div>
@@ -81,6 +97,6 @@ const Auth = observer(() => {
       </Card>
     </Container>
   )
-})
+}
 
 export default Auth

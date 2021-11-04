@@ -59,8 +59,8 @@ class DeviceStore {
     }, */
   ]
 
-  selectedType = {}
-  selectedBrand = {}
+  selectedType = {id: null}
+  selectedBrand = {id: null}
 
   page = 1
   limit = 2
@@ -90,6 +90,11 @@ class DeviceStore {
   setSelectedBrand(brand) {
     this.selectedBrand = brand
     this.page = 1
+  }
+
+  setDefaultFilters() {
+    this.selectedType = {id: null}
+    this.selectedBrand = {id: null}
   }
 
   setPage(page) {

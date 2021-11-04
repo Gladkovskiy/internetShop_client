@@ -1,17 +1,17 @@
 import {observer} from 'mobx-react-lite'
 import React from 'react'
 import {Card, Image} from 'react-bootstrap'
-import device from '../store/DeviceStore'
+
 import rating from '../assets/star.png'
 import {useHistory} from 'react-router'
 import {DEVICE_ROUTE} from '../utils/consts'
 
-const DeviceList = observer(() => {
+const DeviceList = observer(({devices}) => {
   const history = useHistory()
 
   return (
     <div className="d-flex flex-wrap mt-3" style={{minHeight: '50vh'}}>
-      {device.devices.map(device => (
+      {devices.map(device => (
         <Card
           onClick={() => history.push(DEVICE_ROUTE + '/' + device.id)}
           key={device.id}

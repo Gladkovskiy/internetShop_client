@@ -1,33 +1,16 @@
-import React, {useState, useEffect} from 'react'
+import React from 'react'
 import {BrowserRouter} from 'react-router-dom'
 import {observer} from 'mobx-react-lite'
 import {Spinner} from 'react-bootstrap'
 
 import AppRouter from './components/AppRouter'
 import NavBar from './components/Navbar'
-import user from './store/UserStore'
-import {check} from './http/userAPI'
+import useChekAuth from './http/react-query/useChekAuth'
 
 const App = observer(() => {
-  const [loading, setLoading] = useState(true)
+  const queryCheckAuth = useChekAuth()
 
-  useEffect(() => {
-    const checkUser = async () => {
-      try {
-        const userData = await check()
-        user.setUser(userData)
-        user.setIsAuth(true)
-        setLoading(false)
-      } catch (error) {
-        setLoading(false)
-        localStorage.removeItem('token')
-        user.setIsAuth(false)
-      }
-    }
-    checkUser()
-  }, [])
-
-  if (loading) {
+  if (queryCheckAuth.isLoading) {
     return (
       <Spinner
         animation="border"
