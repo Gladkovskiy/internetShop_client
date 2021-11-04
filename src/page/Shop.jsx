@@ -9,9 +9,9 @@ import TypeBar from '../components/TypeBar'
 import device from '../store/DeviceStore'
 
 import Pagenat from '../components/Pagination'
-import useDeviceAllTypeGET from '../http/react-query/useDeviceAllTypeGET'
-import useDeviceAllBrandGET from '../http/react-query/useDeviceAllBrandGET'
-import useDeviceDevicesGET from '../http/react-query/useDeviceDevicesGET'
+import useDeviceAllTypeGET from '../http/react-query/types/useDeviceAllTypeGET'
+import useDeviceAllBrandGET from '../http/react-query/brands/useDeviceAllBrandGET'
+import useDeviceDevicesGET from '../http/react-query/devices/useDeviceDevicesGET'
 
 const Shop = () => {
   const queryType = useDeviceAllTypeGET()

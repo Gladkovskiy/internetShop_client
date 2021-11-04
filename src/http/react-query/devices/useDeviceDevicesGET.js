@@ -1,6 +1,6 @@
 import {useQuery} from 'react-query'
-import {getDevice} from '../deviceAPI'
-import device from '../../store/DeviceStore'
+import {getDevice} from '../../deviceAPI'
+import device from '../../../store/DeviceStore'
 
 const useDeviceDevicesGET = (brandId, typeId, page, limit) => {
   const query = useQuery(

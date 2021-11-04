@@ -7,13 +7,13 @@ export const getType = async () => {
 }
 
 export const createType = async name => {
-  const {data} = await $authHost.post('api/type', {name})
+  const {data} = await $authHost.post('api/type', name)
   return data
 }
 
 export const deleteType = async name => {
   //в delete нет body, из-за этого прописуется {data: {тутданные}} как боди
-  const {data} = await $authHost.delete('api/type', {data: {name}})
+  const {data} = await $authHost.delete('api/type', {data: name})
   return data
 }
 
@@ -24,13 +24,13 @@ export const getBrand = async () => {
 }
 
 export const createBrand = async name => {
-  const {data} = await $authHost.post('api/brand', {name})
+  const {data} = await $authHost.post('api/brand', name)
   return data
 }
 
 export const deleteBrand = async name => {
   //в delete нет body, из-за этого прописуется {data: {тутданные}} как боди
-  const {data} = await $authHost.delete('api/brand', {data: {name}})
+  const {data} = await $authHost.delete('api/brand', {data: name})
   return data
 }
 

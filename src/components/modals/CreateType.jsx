@@ -1,22 +1,10 @@
-import React, {useRef, useState, useEffect} from 'react'
+import React, {useRef, useState} from 'react'
 import {Modal, Button, Form, Col, Row, Dropdown} from 'react-bootstrap'
 import {observer} from 'mobx-react-lite'
 
-import device from '../../store/DeviceStore'
-import {getType} from '../../http/deviceAPI'
-
-const CreateType = ({show, onHide, addItem, deleteItem}) => {
+const CreateType = ({show, onHide, addItem, deleteItem, types}) => {
   const controlType = useRef()
   const [selectedType, setSelectedType] = useState()
-
-  const getTypeAsync = async () => {
-    const type = await getType()
-    device.setType(type)
-  }
-
-  useEffect(() => {
-    getTypeAsync()
-  }, [show])
 
   return (
     <Modal show={show} onHide={onHide} size="lg" centered>
@@ -36,7 +24,7 @@ const CreateType = ({show, onHide, addItem, deleteItem}) => {
             <Dropdown>
               <Dropdown.Toggle>Выберите тип</Dropdown.Toggle>
               <Dropdown.Menu>
-                {device.type.map(item => (
+                {types.map(item => (
                   <Dropdown.Item
                     key={item.id}
                     onClick={() => {
@@ -58,7 +46,7 @@ const CreateType = ({show, onHide, addItem, deleteItem}) => {
               disabled={!selectedType}
               variant="outline-danger"
               onClick={() => {
-                deleteItem(selectedType)
+                deleteItem({name: selectedType})
                 setSelectedType()
               }}
             >
@@ -74,7 +62,7 @@ const CreateType = ({show, onHide, addItem, deleteItem}) => {
 
           <Button
             variant="outline-success"
-            onClick={() => addItem(controlType.current.value)}
+            onClick={() => addItem({name: controlType.current.value})}
           >
             Добавить
           </Button>

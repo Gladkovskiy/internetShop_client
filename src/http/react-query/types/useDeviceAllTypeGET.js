@@ -1,8 +1,8 @@
 import {useQuery} from 'react-query'
-import {getBrand} from '../deviceAPI'
+import {getType} from '../../deviceAPI'
 
-const useDeviceAllBrandGET = () => {
-  const query = useQuery('deviceBrand', getBrand, {
+const useDeviceAllTypeGET = () => {
+  const query = useQuery('deviceType', getType, {
     placeholderData() {
       return []
     },
@@ -13,4 +13,4 @@ const useDeviceAllBrandGET = () => {
   return query
 }
 
-export default useDeviceAllBrandGET
+export default useDeviceAllTypeGET

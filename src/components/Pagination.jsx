@@ -10,11 +10,13 @@ const Paginat = () => {
   return (
     <Pagination className="d-flex justify-content-center mt-5">
       <Pagination.First onClick={() => devices.setPage(1)} />
+
       <Pagination.Prev
         onClick={() =>
           devices.setPage(devices.page !== 1 ? devices.page - 1 : devices.page)
         }
       />
+
       {pages.map((_, index) => (
         <Pagination.Item
           key={index}
@@ -24,6 +26,7 @@ const Paginat = () => {
           {index + 1}
         </Pagination.Item>
       ))}
+
       <Pagination.Next
         onClick={() =>
           devices.setPage(
@@ -31,6 +34,7 @@ const Paginat = () => {
           )
         }
       />
+
       <Pagination.Last onClick={() => devices.setPage(pages.length)} />
     </Pagination>
   )

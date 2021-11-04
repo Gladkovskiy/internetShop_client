@@ -1,22 +1,11 @@
-import React, {useRef, useEffect, useState} from 'react'
+import React, {useRef, useState} from 'react'
 import {Modal, Button, Form, Dropdown, Row, Col} from 'react-bootstrap'
 
-import device from '../../store/DeviceStore'
-import {getBrand} from '../../http/deviceAPI'
 import {observer} from 'mobx-react-lite'
 
-const CreateBrande = ({show, onHide, addItem, deleteItem}) => {
+const CreateBrande = ({show, onHide, addItem, deleteItem, brands}) => {
   const controlType = useRef()
   const [selectedBrand, setSelectedBrand] = useState()
-
-  const getBrandAsync = async () => {
-    const brand = await getBrand()
-    device.setBrand(brand)
-  }
-
-  useEffect(() => {
-    getBrandAsync()
-  }, [show])
 
   return (
     <Modal show={show} onHide={onHide} size="lg" centered>
@@ -37,7 +26,7 @@ const CreateBrande = ({show, onHide, addItem, deleteItem}) => {
             <Dropdown>
               <Dropdown.Toggle>Выберите бренд</Dropdown.Toggle>
               <Dropdown.Menu>
-                {device.brand.map(item => (
+                {brands.map(item => (
                   <Dropdown.Item
                     key={item.id}
                     onClick={() => {
@@ -58,7 +47,7 @@ const CreateBrande = ({show, onHide, addItem, deleteItem}) => {
               disabled={!selectedBrand}
               variant="outline-danger"
               onClick={() => {
-                deleteItem(selectedBrand)
+                deleteItem({name: selectedBrand})
                 setSelectedBrand()
               }}
             >
@@ -72,7 +61,7 @@ const CreateBrande = ({show, onHide, addItem, deleteItem}) => {
           </Button>
           <Button
             variant="outline-success"
-            onClick={() => addItem(controlType.current.value)}
+            onClick={() => addItem({name: controlType.current.value})}
           >
             Добавить
           </Button>

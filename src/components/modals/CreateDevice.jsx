@@ -2,10 +2,8 @@ import React, {useState} from 'react'
 import {observer} from 'mobx-react-lite'
 
 import {Modal, Button, Form, Dropdown, Row, Col} from 'react-bootstrap'
-import device from '../../store/DeviceStore.js'
-import {createDevice} from '../../http/deviceAPI.js'
 
-const CreateDevice = ({show, onHide}) => {
+const CreateDevice = ({show, onHide, types, brands, addItem}) => {
   const [info, setInfo] = useState([])
   const [name, setName] = useState('')
   const [price, setPrice] = useState('')
@@ -40,13 +38,8 @@ const CreateDevice = ({show, onHide}) => {
     formData.append('typeId', selectType.id)
     // массив нельзя передавать или json или blob
     formData.append('info', JSON.stringify(info))
-    console.log(formData.getAll('img'))
-    try {
-      createDevice(formData)
-      onHide()
-    } catch (error) {
-      console.log(error.message)
-    }
+
+    addItem(formData)
   }
 
   return (
@@ -62,7 +55,7 @@ const CreateDevice = ({show, onHide}) => {
               {selectType.name || 'Выберите тип'}
             </Dropdown.Toggle>
             <Dropdown.Menu>
-              {device.type.map(type => (
+              {types.map(type => (
                 <Dropdown.Item
                   key={type.id}
                   onClick={() => setSelectType(type)}
@@ -78,7 +71,7 @@ const CreateDevice = ({show, onHide}) => {
               {selectBrand.name || 'Выберите бренд'}
             </Dropdown.Toggle>
             <Dropdown.Menu>
-              {device.brand.map(brand => (
+              {brands.map(brand => (
                 <Dropdown.Item
                   key={brand.id}
                   onClick={() => setSelectBrand(brand)}
