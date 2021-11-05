@@ -13,6 +13,7 @@ const useCheckAuth = () => {
       user.setIsAuth(true)
     },
     onSettled(data, err) {},
+    retry: 1,
   })
   return query
 }

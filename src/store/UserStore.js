@@ -3,6 +3,7 @@ import {makeAutoObservable} from 'mobx'
 class UserStore {
   isAuth = false
   user = {}
+  basketCountDevices = 0
 
   constructor() {
     makeAutoObservable(this)
@@ -14,6 +15,10 @@ class UserStore {
 
   setUser(user) {
     this.user = user
+  }
+
+  setBasketCountDevices(number) {
+    this.basketCountDevices = number
   }
 }
 

@@ -9,7 +9,6 @@ import useChekAuth from './http/react-query/useChekAuth'
 
 const App = observer(() => {
   const queryCheckAuth = useChekAuth()
-
   if (queryCheckAuth.isLoading) {
     return (
       <Spinner
