@@ -7,7 +7,11 @@ import {Spinner} from 'react-bootstrap'
 import bigStar from '../assets/bigStar.png'
 import useGetOneDevice from '../http/react-query/devices/useGetOneDevice'
 import useAddDevicetoBasket from '../http/react-query/basket/useAddDevicetoBasket'
+import useMtateAddRating from '../http/react-query/rating/useMutateAddRating'
 import user from '../store/UserStore'
+import devices from '../store/DeviceStore'
+import Rating from '../components/Rating'
+import {observer} from 'mobx-react-lite'
 
 const DevicePage = () => {
   const {id} = useParams()
@@ -16,6 +20,7 @@ const DevicePage = () => {
   const {data} = queryOneDevice
 
   const mutateDevicetoBasket = useAddDevicetoBasket()
+  const mutateAddRating = useMtateAddRating()
 
   if (queryOneDevice.isLoading)
     return (
@@ -50,8 +55,16 @@ const DevicePage = () => {
             }}
             className="d-flex justify-content-center align-items-center"
           >
-            {data.rating}
+            {devices.rating}
           </div>
+
+          {!devices.isRayting && (
+            <Rating
+              addRating={mutateAddRating.mutate}
+              userId={user.user.id}
+              deviceId={data.id}
+            />
+          )}
         </Col>
         <Col
           md={4}
@@ -100,4 +113,4 @@ const DevicePage = () => {
   )
 }
 
-export default DevicePage
+export default observer(DevicePage)

@@ -5,6 +5,7 @@ import {Card, Image} from 'react-bootstrap'
 import rating from '../assets/star.png'
 import {useHistory} from 'react-router'
 import {DEVICE_ROUTE} from '../utils/consts'
+import devicess from '../store/DeviceStore'
 
 const DeviceList = observer(({devices}) => {
   const history = useHistory()
@@ -14,7 +15,10 @@ const DeviceList = observer(({devices}) => {
       <div className="d-flex flex-wrap mt-3">
         {devices.map(device => (
           <Card
-            onClick={() => history.push(DEVICE_ROUTE + '/' + device.id)}
+            onClick={() => {
+              devicess.setIsRayting(true)
+              history.push(DEVICE_ROUTE + '/' + device.id)
+            }}
             key={device.id}
             className="ms-2 me-2 mt-3"
             style={{width: 200, cursor: 'pointer', border: 'none'}}

@@ -66,8 +66,19 @@ class DeviceStore {
   limit = 2
   devicesCount = 0
 
+  isRayting = false
+  rating = 0
+
   constructor() {
     makeAutoObservable(this)
+  }
+
+  setRating(rate) {
+    this.rating = rate
+  }
+
+  setIsRayting(trueFalse) {
+    this.isRayting = trueFalse
   }
 
   setType(type) {

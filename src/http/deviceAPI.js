@@ -58,3 +58,8 @@ export const deleteDevice = async name => {
   const {data} = await $authHost.delete('api/device', {data: {name}})
   return data
 }
+
+export const createRayting = async rating => {
+  const {data} = await $authHost.post('api/rayting', rating)
+  return data
+}
