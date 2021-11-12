@@ -1,6 +1,5 @@
 import {useQuery} from 'react-query'
 import {getDevice} from '../../deviceAPI'
-import device from '../../../store/DeviceStore'
 
 const useDeviceDevicesGET = (brandId, typeId, page, limit) => {
   const query = useQuery(
@@ -11,10 +10,9 @@ const useDeviceDevicesGET = (brandId, typeId, page, limit) => {
         return {count: 0, rows: []}
       },
       onError(err) {},
-      onSuccess(data) {
-        device.setCount(data.count)
-      },
+      onSuccess(data) {},
       onSettled(data, err) {},
+      // staleTime: 0,
     }
   )
   return query

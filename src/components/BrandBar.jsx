@@ -1,9 +1,8 @@
-import {observer} from 'mobx-react-lite'
 import React from 'react'
 import {Card} from 'react-bootstrap'
 import device from '../store/DeviceStore'
 
-const BrandBar = observer(({brands}) => {
+const BrandBar = ({brands}) => {
   return (
     <div className="d-flex mt-3 flex-wrap">
       {brands.map(brand => (
@@ -19,6 +18,6 @@ const BrandBar = observer(({brands}) => {
       ))}
     </div>
   )
-})
+}
 
 export default BrandBar

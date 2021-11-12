@@ -13,7 +13,8 @@ const useCheckAuth = () => {
       user.setIsAuth(true)
     },
     onSettled(data, err) {},
-    retry: 1,
+    retry: false,
+    refetchOnWindowFocus: false,
   })
   return query
 }

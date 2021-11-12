@@ -34,7 +34,7 @@ const Shop = () => {
           <DeviceList devices={queryDevices.data.rows} />
         </Col>
       </Row>
-      <Pagenat />
+      <Pagenat devicesCount={queryDevices.data.count} />
     </Container>
   )
 }

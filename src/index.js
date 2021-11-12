@@ -7,7 +7,14 @@ import {ReactQueryDevtools} from 'react-query/devtools'
 import App from './App'
 import reportWebVitals from './reportWebVitals'
 
-const client = new QueryClient()
+const client = new QueryClient({
+  defaultOptions: {
+    queries: {
+      staleTime: 60 * 60 * 1000, // 60 минут
+      cacheTime: 1000 * 60 * 60 * 24, // 24 часа
+    },
+  },
+})
 
 ReactDOM.render(
   <React.StrictMode>

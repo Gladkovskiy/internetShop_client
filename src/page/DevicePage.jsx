@@ -38,7 +38,7 @@ const DevicePage = () => {
       <Row className="mt-3 align-content-center">
         <Col md={4}>
           <Image
-            src={process.env.REACT_APP_API_URL + '/' + data.img}
+            src={process.env.REACT_APP_API_URL + '/image/' + data.img}
             width={300}
           />
         </Col>
@@ -58,7 +58,7 @@ const DevicePage = () => {
             {devices.rating}
           </div>
 
-          {!devices.isRayting && (
+          {!devices.isRayting && user.isAuth && (
             <Rating
               addRating={mutateAddRating.mutate}
               userId={user.user.id}

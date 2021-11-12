@@ -1,4 +1,3 @@
-import {observer} from 'mobx-react-lite'
 import React from 'react'
 import {ListGroup, Button} from 'react-bootstrap'
 
@@ -29,4 +28,4 @@ const TypeBar = ({types}) => {
   )
 }
 
-export default observer(TypeBar)
+export default TypeBar

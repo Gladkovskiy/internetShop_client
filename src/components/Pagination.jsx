@@ -1,11 +1,14 @@
 import React from 'react'
 import {Pagination} from 'react-bootstrap'
-import {observer} from 'mobx-react-lite'
 import devices from '../store/DeviceStore'
 
-const Paginat = () => {
-  let pages = Math.ceil(devices.devicesCount / devices.limit)
+const Paginat = ({devicesCount}) => {
+  let pages = Math.ceil(devicesCount / devices.limit)
   pages = Array(pages).fill('')
+
+  if (devicesCount === 0) {
+    return null
+  }
 
   return (
     <Pagination className="d-flex justify-content-center mt-5">
@@ -40,4 +43,4 @@ const Paginat = () => {
   )
 }
 
-export default observer(Paginat)
+export default Paginat

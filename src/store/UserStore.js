@@ -23,3 +23,15 @@ class UserStore {
 }
 
 export default new UserStore()
+
+/* const UserStore = makeAutoObservable({
+  isAuth: false,
+  user: {},
+  basketCountDevices: 0,
+
+  setIsAuth: bool => (UserStore.isAuth = bool),
+  setUser: user => (UserStore.user = user),
+  setBasketCountDevices: number => (UserStore.basketCountDevices = number),
+})
+
+export default UserStore */

@@ -14,7 +14,9 @@ import useBasketDevicesGET from '../http/react-query/basket/useBasketDevicesGET'
 
 const NavBar = observer(() => {
   const history = useHistory()
+
   useBasketDevicesGET(user.user.basket)
+
   const logOut = () => {
     user.setUser('')
     user.setIsAuth(false)

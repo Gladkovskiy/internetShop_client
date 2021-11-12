@@ -25,7 +25,7 @@ const DeviceList = observer(({devices}) => {
           >
             <Card.Img
               variant="top"
-              src={process.env.REACT_APP_API_URL + '/' + device.img}
+              src={process.env.REACT_APP_API_URL + '/image/' + device.img}
             />
             <div className="d-flex align-items-center justify-content-between">
               <Card.Title style={{fontSize: 14}} className="p-2 m-0">

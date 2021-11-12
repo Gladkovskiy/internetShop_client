@@ -15,7 +15,8 @@ const useDeviceAllBrandGET = basketId => {
         user.setBasketCountDevices(data.count)
       },
       onSettled(data, err) {},
-      retry: 1,
+      retry: false,
+      refetchOnWindowFocus: false,
     }
   )
   return query

@@ -12,7 +12,7 @@ const useDeviceInBasket = basketId => {
       onError(err) {},
       onSuccess(data) {},
       onSettled(data, err) {},
-      retry: 1,
+      retry: 0,
     }
   )
   return query
